@@ -13,7 +13,7 @@ export class Professor {
     @Column()
     birth: string
 
-    @OneToOne(() => Disciplina)
+    @OneToOne(() => Disciplina, disciplina => disciplina.name, {eager: true, onDelete: "CASCADE"})
     @JoinColumn()
     subject: Disciplina
 

@@ -1,6 +1,7 @@
-import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpStatus, Param, Post, Put } from '@nestjs/common';
 import { ProfessorService } from './professor.service';
 import { Professor } from './professor-entity';
+import { FindParamWithId } from 'src/utils/findParamWithId';
 
 @Controller('professor')
 export class ProfessorController {
@@ -8,12 +9,12 @@ export class ProfessorController {
     constructor(private _service: ProfessorService) {}
 
     @Get()
-    get(): Promise<Professor[]> {
+    get(): Promise<Professor[]> | {} {
         return this._service.getProfessores()
     }
 
     @Get(':id')
-    getOnlyOne(@Param() param: any): Promise<Professor> {
+    getOnlyOne(@Param() param: FindParamWithId): Promise<Professor> {
         return this._service.getProfessor(param.id);
     }
 
@@ -23,12 +24,12 @@ export class ProfessorController {
     }
 
     @Put(':id')
-    update(@Param() param: any, @Body() professor: Professor) {
+    update(@Param() param: FindParamWithId, @Body() professor: Professor) {
         return this._service.updateProfessor(professor, param.id);
     }
 
     @Delete(':id')
-    delete(@Param() param: any) {
+    delete(@Param() param: FindParamWithId) {
         return this._service.deleteProfessor(param.id);
     }
 }
