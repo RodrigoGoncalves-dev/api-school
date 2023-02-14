@@ -1,0 +1,20 @@
+name: remote ssh command
+on: [push]
+jobs:
+
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+    - name: executing remote ssh commands using key pair
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.HOSTNAME  }}
+        key: ${{ secrets.AWS_PRIVATE_KEY  }}
+        username: ${{ secrets.USER_NAME  }}
+        port: 22
+        script: |
+            #logged in ec2.
+            cd app/api-school
+            git pull
+            docker-compose up --force-recreate --build -d
