@@ -4,9 +4,9 @@ import { Professor } from "src/professor/professor-entity";
 
 export const connection: TypeOrmModule = {
     "type": "mysql",
-    "host": "172.18.0.1",
+    "host": "172.18.0.2",
     "port": 3306,
-    "username": "rodrigo",
+    "username": "root",
     "password": "123456",
     "database": "school",
     "entities": [Disciplina, Professor],

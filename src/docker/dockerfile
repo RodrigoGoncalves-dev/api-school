@@ -1,5 +1,11 @@
-FROM node:14-alpine
+FROM node
 
 WORKDIR /srv/app
 
-CMD npm run start:dev
+COPY package*.json ./
+
+RUN npm i -f
+
+COPY . .
+
+RUN npm run start:dev

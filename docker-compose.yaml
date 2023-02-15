@@ -1,7 +1,9 @@
 version: '3.6'
 services:
   api:
-    build: ./src/docker/dockerfile
+    build: 
+      context: ./src/docker
+      dockerfile: dockerfile
     volumes:
       - ./:/srv/app
     depends_on:
@@ -28,9 +30,9 @@ services:
       - 3306:3306
     environment:
       - MYSQL_DATABASE='school'
-      - MYSQL_PASSWORD='qwert'
+      - MYSQL_PASSWORD='123456'
       - MYSQL_USER='rodrigo'
-      - MYSQL_ROOT_PASSWORD='qwert'
+      - MYSQL_ROOT_PASSWORD='123456'
       - MYSQL_ROOT_HOST='%'
     volumes:
       - db:/var/lib/mysql
