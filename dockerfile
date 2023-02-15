@@ -8,4 +8,4 @@ RUN npm i --quiet
 
 COPY . .
 
-CMD npm run start:dev
+CMD node /node_modules/@nestjs/bin/nest.js start
