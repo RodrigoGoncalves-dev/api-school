@@ -28,8 +28,8 @@ resource "aws_security_group" "api_school_sgp" {
 
   ingress {
     cidr_blocks = var.cidrSecurityGroup
-    from_port   = 81
-    to_port     = 81
+    from_port   = 8080
+    to_port     = 8080
     protocol    = "tcp"
   }
 }
