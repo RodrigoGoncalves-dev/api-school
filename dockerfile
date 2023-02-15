@@ -4,8 +4,8 @@ WORKDIR /srv/app
 
 COPY package*.json ./
 
-RUN npm i -f
+RUN npm i --quiet
 
 COPY . .
 
-RUN npm run start:dev
+CMD npm run start:dev
