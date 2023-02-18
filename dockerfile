@@ -8,4 +8,6 @@ RUN npm i --quiet
 
 COPY . .
 
-CMD node /node_modules/@nestjs/bin/nest.js start
+CMD npm run start
+
+EXPOSE 3000
