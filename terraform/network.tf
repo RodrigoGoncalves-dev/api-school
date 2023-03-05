@@ -1,16 +1,16 @@
 resource "aws_vpc" "vpc_api" {
-  cidr_block            = "172.24.0.0/16"
+  cidr_block = "172.24.0.0/16"
 }
 
 resource "aws_subnet" "api_subnet" {
-  vpc_id        = aws_vpc.vpc_api.id
-  cidr_block    = var.cidrSubnetIp
+  vpc_id            = aws_vpc.vpc_api.id
+  cidr_block        = var.cidrSubnetIp
   availability_zone = "us-east-1a"
 }
 
 resource "aws_security_group" "api_school_sgp" {
-  vpc_id        = aws_vpc.vpc_api.id
-  name          = "api-school-sgp"
+  vpc_id = aws_vpc.vpc_api.id
+  name   = "api-school-sgp"
 
   egress {
     cidr_blocks = var.cidrSecurityGroup
@@ -18,7 +18,7 @@ resource "aws_security_group" "api_school_sgp" {
     to_port     = 0
     protocol    = -1
   }
-  
+
   ingress {
     cidr_blocks = var.cidrSecurityGroup
     from_port   = 22
@@ -28,8 +28,15 @@ resource "aws_security_group" "api_school_sgp" {
 
   ingress {
     cidr_blocks = var.cidrSecurityGroup
-    from_port   = 8080
-    to_port     = 8080
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
+  }
+
+  ingress {
+    cidr_blocks = var.cidrSecurityGroup
+    from_port   = 3001
+    to_port     = 3001
     protocol    = "tcp"
   }
 }
@@ -52,6 +59,6 @@ resource "aws_route_table" "api_public_rtb" {
 }
 
 resource "aws_route_table_association" "api_rta" {
-  subnet_id  = aws_subnet.api_subnet.id
+  subnet_id      = aws_subnet.api_subnet.id
   route_table_id = aws_route_table.api_public_rtb.id
 }

@@ -7,7 +7,7 @@ variable "cidrSubnetIp" {
 }
 
 variable "key_name" {
-  default = "rodrigo2user"
+  default = "test"
 }
 
 variable "access_private_key" {
