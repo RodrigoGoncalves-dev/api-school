@@ -1,0 +1,21 @@
+---
+
+- hosts: all
+  user: ec2-user
+  become: yes
+  tasks:
+
+  - name: update system and install docker on system
+    yum:
+      name:
+        - docker
+      update_cache: yes
+  
+  - name: give access docker to user root
+    command: "sudo usermod -a -G docker ec2-user"
+  
+  - name: starting docker on system
+    ansible.builtin.systemd:
+      service: docker
+      state: started
+      enabled: true
